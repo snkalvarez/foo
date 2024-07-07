@@ -1,0 +1,34 @@
+{
+  // Name this configuration
+  "name": "Foo pruebas!",
+  //Use the base codespace image
+  "image": "mcr.microsoft.com/vscode/devcontainers/universal:latest",
+
+  "remoteUser": "codespace",
+  "overrideCommand": false,
+  //Add the IDs of extensions you want installed when the container is created.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot"
+      ]
+    },
+    "codespaces": {
+      "openFiles": [
+        "codespace.md",".devcontainer/devcontainer.json"
+      ]
+    }
+  }
+  //crear comando para ejecutar el codigo bash de setup.sh sudo bash 
+  //"postCreateCommand": "echo '#ejecuandot comando post ' >> codespace.md"
+  ,
+  "runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"],
+  // Configuración para instalar Java en el container
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "java.home": "/usr/lib/jvm/java-11-openjdk-amd64", // Ruta al JDK de Java 11
+    "java.jdt.ls.vmargs": "-Djava.sealed.packages=unauthorized" // Opcional: configuración adicional para el Language Server de Java
+  },
+  // Comandos adicionales para instalar Java y otras dependencias
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y openjdk-11-jdk maven"
+}
